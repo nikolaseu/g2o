@@ -1,4 +1,4 @@
-REM IMPORTANT: MUST be run from x64 Native Tools Command Prompt for VS 2017!
+REM IMPORTANT: MUST be run from "Developer Command Prompt for VS 2019"!
 
 REM Install dependencies (if not already installed)
 set VCPKG_ROOT_DIR=C:\Users\nikol\Projects\vcpkg
@@ -6,14 +6,13 @@ set VCPKG_DEFAULT_TRIPLET=x64-windows
 call ./script/install-deps-windows.bat
 
 REM set up some env variables
-set CMAKE_EXE=C:\Users\nikol\Projects\vcpkg\downloads\tools\cmake-3.12.4-windows\cmake-3.12.4-win32-x86\bin\cmake.exe
 set EIGEN3_INCLUDE_DIR=C:\Users\nikol\Projects\vcpkg\installed\x64-windows\include\eigen3
 
 REM configure
 mkdir build
 cd build
 
-%CMAKE_EXE% -G "Visual Studio 15 2017 Win64" ^
+cmake -G "Visual Studio 16 2019" ^
         -DG2O_BUILD_LINKED_APPS=OFF ^
         -DG2O_BUILD_EXAMPLES=OFF ^
         -DBUILD_CSPARSE=ON ^
