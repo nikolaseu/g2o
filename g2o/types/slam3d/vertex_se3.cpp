@@ -131,12 +131,23 @@ namespace g2o {
 
     VertexSE3* that = static_cast<VertexSE3*>(element);
 
-    glColor3f(POSE_VERTEX_COLOR);
+//    glColor3f(POSE_VERTEX_COLOR);
+    glColor3f(LANDMARK_VERTEX_COLOR);
     glPushMatrix();
     glMultMatrixd(that->estimate().matrix().cast<double>().eval().data());
+#if 0
     opengl::drawArrow2D(_triangleX->value(), _triangleY->value(), _triangleX->value()*.3f);
     drawCache(that->cacheContainer(), params_);
     drawUserData(that->userData(), params_);
+#else
+    glPushAttrib(GL_ENABLE_BIT);
+    glDisable(GL_LIGHTING);
+    glBegin(GL_LINES);
+    glVertex3f(0,0,0);
+    glVertex3f(0,0,1.15);
+    glEnd();
+    glPopAttrib();
+#endif
     glPopMatrix();
     return this;
   }
